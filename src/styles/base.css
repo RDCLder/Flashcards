@@ -1,0 +1,25 @@
+/*************************************************
+    BASE VIEW COMPONENTS
+**************************************************/
+
+#BaseContainer {
+    background-image: linear-gradient(to right, #01D5F4, #123884, );
+    padding-top: 10vh;
+    height: 100vh;
+    /* border: solid red; */
+}
+
+#NavBar {
+    position: fixed;
+    top: 0;
+    background-image: linear-gradient(90deg, navy, purple);
+    height: 10vh;
+    width: 100%;
+    color: white;
+    text-align: center;
+    z-index: 2;
+}
+
+.col, .col-2 {
+    border: solid red;
+}

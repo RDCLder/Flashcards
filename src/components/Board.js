@@ -1,11 +1,12 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import Flashcard from "./Flashcard";
-import "../styles/board.css";
+import "../styles/Board.css";
 
 function generateDeck(limit) {
     let words = [];
     let text = [];
+    let deck = [];
     for (let i = 0; i < limit; i ++) {
         deck.push({ isFlipped: false, value: words[i], match: i });
         deck.push({ isFlipped: false, value: text[i], match: i });

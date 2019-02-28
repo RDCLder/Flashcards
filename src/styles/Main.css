@@ -1,0 +1,38 @@
+/*************************************************
+    MAIN VIEW COMPONENTS
+**************************************************/
+
+#MainContainer {
+    height: auto;
+    min-height: 80vh;
+    width: 80vh;
+    border: solid navy;
+}
+
+#MainTabs {
+    border: solid black;
+}
+
+/*------------------------------------------------
+    AddCard Component
+-------------------------------------------------*/
+
+#AddCardContainer {
+    border: solid blue;    
+}
+
+/*------------------------------------------------
+    Saved Component
+-------------------------------------------------*/
+
+#SavedContainer {
+    border: solid blue;    
+}
+
+/*------------------------------------------------
+    Settings Component
+-------------------------------------------------*/
+
+#SettingsContainer {
+    border: solid blue;    
+}

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Container, Row, Col } from "react-bootstrap";
-import "../styles/base.css";
+import Navigator from "./Navigator";
+import "../styles/Base.css";
 
 class Base extends React.Component {
     constructor(props) {
@@ -10,8 +11,9 @@ class Base extends React.Component {
 
     render() {
         return (
-            <Container fluid="true">
-
+            <Container fluid="true" id="BaseContainer">
+                <Navigator />
+                {this.props.children}
             </Container>
         );
     }
