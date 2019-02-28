@@ -1,4 +1,5 @@
 import React from 'react';
+import "../styles/base.css";
 
 class Main extends React.Component {
     constructor(props) {
@@ -8,9 +9,9 @@ class Main extends React.Component {
 
     render() {
         return (
-            <Container fluid="true">
-
-            </Container>
+            <div>
+                
+            </div>
         );
     }
 }
