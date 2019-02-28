@@ -4,14 +4,10 @@ import Navigator from "./Navigator";
 import "../styles/Base.css";
 
 class Base extends React.Component {
-    constructor(props) {
-        super(props);
-        
-    }
 
     render() {
         return (
-            <Container fluid="true" id="BaseContainer">
+            <Container fluid="true" className="BaseContainer my-auto">
                 <Navigator />
                 {this.props.children}
             </Container>

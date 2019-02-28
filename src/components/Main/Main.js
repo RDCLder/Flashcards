@@ -3,7 +3,7 @@ import { Tabs, Tab, Container, Row, Col } from "react-bootstrap";
 import AddCard from "./AddCard";
 import Saved from "./Saved";
 import Settings from "./Settings";
-import "../styles/Main.css";
+import "../../styles/Main.css";
 
 // This will be the front page in which users can upload info for flashcards and adjust settings
 // The saved/settings page will have saved flashcards that display here
@@ -25,14 +25,18 @@ class Main extends React.Component {
                     id="MainTabs"
                     activeKey={this.state.key}
                     onSelect={key => this.setState({ key })}
+                    variant="pills"
                 >
-                    <Tab eventKey="cards" title="Add Card">
+                    <Tab eventKey="cards" title="CARDS">
+                        <Row className="separator"></Row>
                         <AddCard />
                     </Tab>
-                    <Tab eventKey="saved" title="Saved">
+                    <Tab eventKey="saved" title="SAVED">
+                        <Row className="separator"></Row>
                         <Saved />
                     </Tab>
-                    <Tab eventKey="settings" title="Settings">
+                    <Tab eventKey="settings" title="SETTINGS">
+                        <Row className="separator"></Row>
                         <Settings />
                     </Tab>
                 </Tabs>

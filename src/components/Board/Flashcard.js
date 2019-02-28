@@ -1,6 +1,6 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import "../styles/Board.css";
+import "../../styles/Board.css";
 
 class Flashcard extends React.Component {
     constructor(props) {

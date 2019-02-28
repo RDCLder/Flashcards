@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container, Row, Col } from "react-bootstrap";
-import "../styles/Main.css";
+import "../../styles/Main.css";
 
 class Settings extends React.Component {
     constructor(props) {

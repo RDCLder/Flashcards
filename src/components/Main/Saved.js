@@ -1,8 +1,8 @@
 import React from 'react';
 import { Container, Row, Col } from "react-bootstrap";
-import "../styles/Main.css";
+import "../../styles/Main.css";
 
-class AddCard extends React.Component {
+class Saved extends React.Component {
     constructor(props) {
         super(props);
         
@@ -10,11 +10,11 @@ class AddCard extends React.Component {
 
     render() {
         return (
-            <Row id="AddCardContainer">
-                AddCard Component
+            <Row id="SavedContainer">
+                Saved Component
             </Row>
         );
     }
 }
 
-export default AddCard;
+export default Saved;

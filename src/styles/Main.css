@@ -3,14 +3,32 @@
 **************************************************/
 
 #MainContainer {
+    /* background-color: white; */
     height: auto;
     min-height: 80vh;
-    width: 80vh;
-    border: solid navy;
+    width: 80vw;
+    border-radius: 10px;
 }
 
-#MainTabs {
-    border: solid black;
+.separator {
+    margin-top: 1%;
+    border-bottom: solid white;
+}
+
+a {
+    color: white;
+}
+
+a:hover {
+    color: skyblue
+}
+
+input {
+    border-radius: 8px;
+}
+
+.fas:hover {
+    cursor: pointer;
 }
 
 /*------------------------------------------------
@@ -18,7 +36,8 @@
 -------------------------------------------------*/
 
 #AddCardContainer {
-    border: solid blue;    
+    padding: 2%;
+    color: white;
 }
 
 /*------------------------------------------------
@@ -26,7 +45,7 @@
 -------------------------------------------------*/
 
 #SavedContainer {
-    border: solid blue;    
+    padding: 2%;  
 }
 
 /*------------------------------------------------
@@ -34,5 +53,5 @@
 -------------------------------------------------*/
 
 #SettingsContainer {
-    border: solid blue;    
+    padding: 2%;  
 }

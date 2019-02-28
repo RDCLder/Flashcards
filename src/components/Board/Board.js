@@ -1,7 +1,7 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import Flashcard from "./Flashcard";
-import "../styles/Board.css";
+import "../../styles/Board.css";
 
 function generateDeck(limit) {
     let words = [];
