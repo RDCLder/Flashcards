@@ -5,8 +5,8 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import {createStore} from "redux";
 import { Provider } from "react-redux";
 import Base from "./components/Base";
-import Main from "./components/Main";
-import Board from "./components/Board";
+import Main from "./components/Main/Main";
+import Board from "./components/Board/Board";
 import reducer from "./reducers/reducer";
 
 const store = createStore(reducer,

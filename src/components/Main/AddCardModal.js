@@ -54,7 +54,7 @@ class AddCardModal extends React.Component {
                     <h4>ADD CARD</h4>
                 </Button>
 
-                <Modal show={this.state.show} onHide={this.handleClose} centered fluid="true">
+                <Modal show={this.state.show} onHide={this.handleClose} centered size="lg">
                     <Modal.Header>
                         <Modal.Title>Add Card</Modal.Title>
                         <i class="fas fa-times" onClick={() => this.handleClose()}></i>
@@ -65,16 +65,18 @@ class AddCardModal extends React.Component {
                                 <Col>
                                     <h5>Word</h5>
                                     <input type="text"
-                                        placeholder="Word"
+                                        placeholder="Word goes here"
                                         onChange={(e) => this.changeWord(e)}
+                                        className="modalInput"
                                     />
                                 </Col>
 
                                 <Col>
                                     <h5>Text</h5>
                                     <input type="text"
-                                        placeholder="Word"
+                                        placeholder="Text goes here"
                                         onChange={(e) => this.changeText(e)}
+                                        className="modalInput"
                                     />
                                 </Col>
                             </Row>

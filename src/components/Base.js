@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, Row, Col } from "react-bootstrap";
 import Navigator from "./Navigator";
-import "../styles/Base.css";
+import "../styles/Main.css";
 
 class Base extends React.Component {
 

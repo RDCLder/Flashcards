@@ -8,8 +8,8 @@ function generateDeck(limit) {
     let text = [];
     let deck = [];
     for (let i = 0; i < limit; i ++) {
-        deck.push({ isFlipped: false, value: words[i], match: i });
-        deck.push({ isFlipped: false, value: text[i], match: i });
+        deck.push({ isFlipped: false, value: words[i], id: i });
+        deck.push({ isFlipped: false, value: text[i], id: i });
     }
     shuffle(deck);
     return deck;
@@ -68,7 +68,7 @@ class Board extends React.Component {
             let card2Index = newPickedCards[1];
             var card1 = newDeck[card1Index];
             var card2 = newDeck[card2Index];
-            if (card1.match !== card2.match) {
+            if (card1.id !== card2.id) {
                 setTimeout(() => {
                     this.unflipCards(card1Index, card2Index);
                 }, 1000);
