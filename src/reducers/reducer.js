@@ -10,6 +10,18 @@ const reducer = (state, action) => {
                         text: "Click the ADD CARD button to add your own card.",
                         id: "Example Card"
                     }
+                ],
+                test1: [
+                    {
+                        word: "Test 1.1",
+                        text: "Test 1.1",
+                        id: "Test 1.1"
+                    },
+                    {
+                        word: "Test 1.2",
+                        text: "Test 1.2",
+                        id: "Test 1.2"
+                    }
                 ]
             }
         };

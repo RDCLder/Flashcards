@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Col, Card, Collapse } from "react-bootstrap";
+import { Container, Row, Col, Card, Collapse } from "react-bootstrap";
 import { connect } from "react-redux";
 import actionDeleteSavedCard from "../../../actions/actionDeleteSavedCard";
 import "../../../styles/Main.css";
@@ -16,28 +16,30 @@ class Collection extends React.Component {
     render() {
         const { open } = this.state;
         return (
-            <>
-                <Row
-                    onClick={() => this.setState({ open: !open })}
-                    aria-controls="CollectionCards"
-                    aria-expanded={open}
-                >
-                    <Col>
+            <Container
+                onClick={() => this.setState({ open: !open })}
+                aria-controls={this.props.name}
+                aria-expanded={open}
+                className="CollectionContainer"
+            >
+                <Row className="CollectionRow m-auto">
+                    <Col className="CollectionCol my-auto pl-4">
                         <h4>{this.props.name}</h4>
                     </Col>
-                    <Col>
+                    <Col></Col>
+                    <Col className="textRight my-auto pr-4">
                         {this.props.saved[this.props.name].length} Flashcards
                     </Col>
                 </Row>
                 <Collapse in={this.state.open}>
-                    <div id="CollectionCards">
+                    <Row className="CollectionRow justify-content-center mt-4 mb-4" id={this.props.name}>
                         {this.props.saved[this.props.name].map(card => {
                             return <Card className="card m-2" key={card.id}>
                                 <Card.Body>
                                     <Card.Title className="cardTitle">
                                         {card.word}
                                         <i className="fas fa-times cardButton"
-                                            onClick={() => this.props.eventDeleteSavedCard(card)}
+                                            onClick={() => this.props.eventDeleteSavedCard(this.props.name, card)}
                                         />
                                         <i className="fas fa-pencil-alt cardButton"
                                         />
@@ -48,9 +50,9 @@ class Collection extends React.Component {
                                 </Card.Body>
                             </Card>;
                         })}
-                    </div>
+                    </Row>
                 </Collapse>
-            </>
+            </Container>
         );
     }
 }

@@ -3,7 +3,7 @@
 **************************************************/
 
 .BaseContainer {
-    background-image: linear-gradient(90deg, skyblue, gainsboro );
+    background-image: linear-gradient(90deg, #3b5998, #dfe3ee);
     padding-top: 20vh;
     width: 100%;
     height: 100%;
@@ -14,35 +14,31 @@
     position: fixed;
     top: 0;
     background-color: white;
-    /* opacity: 0.8; */
-    height: 12vh;
+    height: 8vh;
     width: 100%;
     color: black;
     z-index: 2;
 }
 
-.col, .col-1, .col-2 {
-    /* border: solid red; */
+.row {
+    width: 100%;
+    height: auto;
 }
 
 .col > h2 {
     padding-left: 1%;
 }
 
-/*************************************************
-    MAIN VIEW COMPONENTS
-**************************************************/
-
-#MainContainer {
-    height: auto;
-    min-height: 80vh;
-    width: 80vw;
-    border-radius: 10px;
+.textLeft {
+    text-align: left;
 }
 
-.separator {
-    margin-top: 1%;
-    border-bottom: solid white;
+.textCenter {
+    text-align: center;
+}
+
+.textRight {
+    text-align: right;
 }
 
 a {
@@ -71,8 +67,7 @@ button:focus {
 
 .floatButton {
     position: fixed;
-    /* background-color: skyblue; */
-    background-image: linear-gradient(to right, skyblue, lightblue);
+    background-image: linear-gradient(to right, #3b5998, #8b9dc3);
     color: white;
     right: 50px;
     width: 70px;
@@ -86,6 +81,22 @@ button:focus {
 
 .floatButton > .fas {
     font-size: 30px;
+}
+
+/*************************************************
+    MAIN VIEW COMPONENTS
+**************************************************/
+
+#MainContainer {
+    height: auto;
+    min-height: 80vh;
+    width: 80vw;
+    border-radius: 10px;
+}
+
+.separator {
+    margin-top: 1%;
+    border-bottom: solid white;
 }
 
 #AddCardButton {
@@ -148,10 +159,42 @@ button:focus {
     padding: 2%;  
 }
 
+.CollectionContainer {
+    background-image: linear-gradient(90deg, midnightblue, rgb(151, 160, 212));
+    width: 70vw;
+    margin-bottom: 1%;
+    padding: 1%;
+    color: white;
+    /* color: a; */
+    border-radius: 10px;
+}
+
+.CollectionRow {
+    width: 100%;
+    padding: 0;
+}
+
+.CollectionCol {
+    /* padding: 0; */
+    /* border: solid red; */
+}
+
 /*------------------------------------------------
     Settings Component
 -------------------------------------------------*/
 
 #SettingsContainer {
     padding: 2%;  
+}
+
+/*************************************************
+    OTHER
+**************************************************/
+
+a > h4 {
+    color: black;
+}
+
+a > h4:hover {
+    color: navy;
 }

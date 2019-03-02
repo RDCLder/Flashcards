@@ -19,10 +19,10 @@ class Navigator extends React.Component {
                     <h2>Flashify</h2>
                 </Col>
                 <Col xs={1} className="my-auto">
-                    <h4><Link to="/">Cards</Link></h4>
+                    <Link to="/"><h4>Cards</h4></Link>
                 </Col>
                 <Col xs={1} className="my-auto">
-                    <h4><Link to="/">Play</Link></h4>
+                    <Link to="/"><h4>Play</h4></Link>
                 </Col>
                 <Col xs={1} className="my-auto"></Col>
             </Row>
