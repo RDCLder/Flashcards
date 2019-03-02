@@ -13,7 +13,7 @@ class AddCard extends React.Component {
 
     componentWillMount() {
         if (this.props.cards.length === 0) {
-            var flashcards = this.props.saved.example;
+            var flashcards = this.props.saved.Example;
         }
         else {
             var flashcards = this.props.cards;
@@ -22,43 +22,58 @@ class AddCard extends React.Component {
     }
 
     render() {
-
         let flashcards = this.componentWillMount();
+        if (flashcards !== undefined) {
+            return (
+                <Container id="AddCardContainer">
 
-        return (
-            <Container id="AddCardContainer">
+                    {/* Loading Existing Cards */}
+                    <Row className="justify-content-center mb-4">
+                        {flashcards.map(card => {
+                            return <Card className="card m-2" key={card.id}>
+                                <Card.Body>
+                                    <Card.Title className="cardTitle">
+                                        {card.word}
+                                        <i className="fas fa-times cardButton"
+                                            onClick={() => this.props.eventDeleteCard(card)}
+                                        />
+                                        <i className="fas fa-pencil-alt cardButton"
+                                        />
+                                    </Card.Title>
+                                    <Card.Text className="cardText">
+                                        {card.text}
+                                    </Card.Text>
+                                </Card.Body>
+                            </Card>;
+                        })}
+                    </Row>
 
-                {/* Loading Existing Cards */}
-                <Row className="justify-content-center mb-4">
-                    {flashcards.map(card => {
-                        return <Card className="card m-2" key={card.id}>
-                            <Card.Body>
-                                <Card.Title className="cardTitle">
-                                    {/* <Row className="justify-content-between"> */}
-                                    {card.word}
-                                    <i className="fas fa-times cardButton"
-                                        onClick={() => this.props.eventDeleteCard(card)}
-                                    />
-                                    <i className="fas fa-pencil-alt cardButton"
-                                    />
-                                    {/* </Row> */}
-                                </Card.Title>
-                                <Card.Text className="cardText">
-                                    {card.text}
-                                </Card.Text>
-                            </Card.Body>
-                        </Card>;
-                    })}
-                </Row>
+                    {/* Save Button */}
+                    <SaveCardsModal />
 
-                {/* Save Button */}
-                <SaveCardsModal />
+                    {/* AddCard Button */}
+                    <AddCardModal />
 
-                {/* AddCard Button */}
-                <AddCardModal />
+                </Container>
+            );
+        }
+        else {
+            return (
+                <Container id="AddCardContainer">
 
-            </Container>
-        );
+                    {/* Loading Existing Cards */}
+                    <Row className="justify-content-center mb-4">
+                    </Row>
+
+                    {/* Save Button */}
+                    <SaveCardsModal />
+
+                    {/* AddCard Button */}
+                    <AddCardModal />
+
+                </Container>
+            );
+        }
     }
 }
 

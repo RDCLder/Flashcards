@@ -16,7 +16,7 @@ class Navigator extends React.Component {
             <Row id="NavBar">
                 <Col xs={1} className="my-auto"></Col>
                 <Col className="my-auto">
-                    <h2>Flashify</h2>
+                    <Link to="/"><h2>Flashify</h2></Link>
                 </Col>
                 <Col xs={1} className="my-auto">
                     <Link to="/"><h4>Cards</h4></Link>

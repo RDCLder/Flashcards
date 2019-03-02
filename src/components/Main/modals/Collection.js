@@ -2,6 +2,7 @@ import React from 'react';
 import { Container, Row, Col, Card, Collapse } from "react-bootstrap";
 import { connect } from "react-redux";
 import actionDeleteSavedCard from "../../../actions/actionDeleteSavedCard";
+import actionDeleteCollection from "../../../actions/actionDeleteCollection";
 import "../../../styles/Main.css";
 
 class Collection extends React.Component {
@@ -17,22 +18,34 @@ class Collection extends React.Component {
         const { open } = this.state;
         return (
             <Container
-                onClick={() => this.setState({ open: !open })}
                 aria-controls={this.props.name}
                 aria-expanded={open}
                 className="CollectionContainer"
             >
-                <Row className="CollectionRow m-auto">
-                    <Col className="CollectionCol my-auto pl-4">
+                <Row className="CollectionHead">
+                    <Col className="my-auto pl-4">
                         <h4>{this.props.name}</h4>
                     </Col>
                     <Col></Col>
-                    <Col className="textRight my-auto pr-4">
-                        {this.props.saved[this.props.name].length} Flashcards
+                    <Col className="textRight my-auto">
+                        {this.props.saved[this.props.name].length} Flashcard(s)
+                    </Col>
+                    <Col xs={1} className="textRight my-auto pr-4">
+                        <i className="fas fa-chevron-down CollectionButton"
+                            onClick={() => this.setState({ open: !open })}
+                        />
+                    </Col>
+                    <Col xs={1} className="textRight my-auto pr-4">
+                        <i className="fas fa-times CollectionButton"
+                            onClick={() => this.props.eventDeleteCollection(this.props.name)}
+                        />
                     </Col>
                 </Row>
                 <Collapse in={this.state.open}>
-                    <Row className="CollectionRow justify-content-center mt-4 mb-4" id={this.props.name}>
+                    <Row className="CollectionBody justify-content-center" 
+                        id={this.props.name} 
+                        onClick={() => this.setState({ open: !open })}
+                    >
                         {this.props.saved[this.props.name].map(card => {
                             return <Card className="card m-2" key={card.id}>
                                 <Card.Body>
@@ -66,7 +79,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        eventDeleteSavedCard: (name, card) => dispatch(actionDeleteSavedCard(name, card))
+        eventDeleteSavedCard: (name, card) => dispatch(actionDeleteSavedCard(name, card)),
+        eventDeleteCollection: (name) => dispatch(actionDeleteCollection(name))
     };
 };
 
