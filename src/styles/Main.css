@@ -14,7 +14,7 @@
     position: fixed;
     top: 0;
     background-color: white;
-    opacity: 0.8;
+    /* opacity: 0.8; */
     height: 12vh;
     width: 100%;
     color: black;
@@ -69,6 +69,37 @@ button:focus {
     cursor: pointer;
 }
 
+.floatButton {
+    position: fixed;
+    /* background-color: skyblue; */
+    background-image: linear-gradient(to right, skyblue, lightblue);
+    color: white;
+    right: 50px;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    text-align: center;
+    box-shadow: 2px 2px 4px #999;
+    font-size: 30px;
+    z-index: 2;
+}
+
+.floatButton > .fas {
+    font-size: 30px;
+}
+
+#AddCardButton {
+    bottom: 230px;
+}
+
+#SaveCardsButton {
+    bottom: 140px;
+}
+
+#topButton {
+    bottom: 50px;
+}
+
 /*------------------------------------------------
     AddCard Component
 -------------------------------------------------*/
@@ -86,14 +117,27 @@ button:focus {
 .card {
     height: 40vh;
     width: 30vw;
+    color: black;
     border-radius: 10px;
 }
 
 .cardTitle {
-    padding: 0;
-    color: black;
     border-bottom: solid red;
     border-width: thin;
+    overflow: hidden;
+}
+
+.cardButton {
+    float: right;
+    margin-left: 2%;
+    font-size: 20px;
+    border-radius: 5%;
+}
+
+.cardText {
+    text-align: justify;
+    color: black;
+    overflow: hidden;
 }
 
 /*------------------------------------------------

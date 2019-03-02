@@ -1,5 +1,9 @@
 import React from 'react';
 import { Container, Row, Col } from "react-bootstrap";
+import { connect } from "react-redux";
+import Collection from "./modals/Collection";
+import actionDeleteSavedCard from "../../actions/actionDeleteSavedCard";
+import actionDeleteCollection from "../../actions/actionDeleteCollection";
 import "../../styles/Main.css";
 
 class Saved extends React.Component {
@@ -11,10 +15,26 @@ class Saved extends React.Component {
     render() {
         return (
             <Row id="SavedContainer">
-                Saved Component
+                {Object.keys(this.props.saved).map((key) => {
+                    return <Collection key={key} name={key} />
+                })}
             </Row>
         );
     }
 }
 
-export default Saved;
+const mapStateToProps = (state) => {
+    return {
+        cards: state.cards,
+        saved: state.saved
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        eventDeleteSavedCard: (name, card) => dispatch(actionDeleteSavedCard(name, card)),
+        eventDeleteCollection: (name) => dispatch(actionDeleteCollection(name))
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Saved);

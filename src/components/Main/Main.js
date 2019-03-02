@@ -40,6 +40,16 @@ class Main extends React.Component {
                         <Settings />
                     </Tab>
                 </Tabs>
+
+                {/* Top Button */}
+                <a href="/#">
+                    <button type="button"
+                        className="btn floatButton"
+                        id="topButton"
+                    >
+                        <i className="fas fa-arrow-up"></i>
+                    </button>
+                </a>
             </Container>
         );
     }

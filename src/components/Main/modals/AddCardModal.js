@@ -1,6 +1,8 @@
 import React from 'react';
 import { Container, Row, Col, Modal, Button } from "react-bootstrap";
-import "../../styles/Main.css";
+import { connect } from "react-redux";
+import actionAddCard from "../../../actions/actionAddCard";
+import "../../../styles/Main.css";
 
 class AddCardModal extends React.Component {
     constructor(props) {
@@ -9,22 +11,24 @@ class AddCardModal extends React.Component {
         this.state = {
             show: false,
             word: "",
-            text: ""
+            text: "",
+            id: "",
         };
     }
 
     changeWord(e) {
         this.setState({
-            ...this.state,
-            word: e.target.value
+            word: e.target.value,
+            id: e.target.value
         });
+        console.log(this.state.show, this.state.word, this.state.text, this.state.id);
     }
 
     changeText(e) {
         this.setState({
-            ...this.state,
             text: e.target.value
         });
+        console.log(this.state.show, this.state.word, this.state.text, this.state.id);
     }
 
     handleSubmit() {
@@ -34,30 +38,54 @@ class AddCardModal extends React.Component {
         else if (this.state.text === "") {
             alert("The text can't be blank!");
         }
+        else if (this.state.word.length > 40) {
+            alert("The word cannot exceed 40 characters!");
+        }
+        else if (this.state.word.length > 200) {
+            alert("The text cannot exceed 200 characters!");
+        }
+        else if (this.props.cards.includes(this.state.word)) {
+            alert(`${this.state.word} has already been used!`);
+        }
         else {
-            this.setState({ show: false });
+            this.setState({
+                show: false 
+            });
+            this.props.eventAddCard({
+                word: this.state.word,
+                text: this.state.text,
+                id: this.state.word
+            });
         }
     }
 
     handleClose() {
-        this.setState({ show: false });
+        this.setState({
+            show: false 
+        });
     }
 
     handleShow() {
-        this.setState({ show: true });
+        this.setState({
+            show: true 
+        });
     }
 
     render() {
         return (
             <>
-                <Button onClick={() => this.handleShow()}>
-                    <h4>ADD CARD</h4>
-                </Button>
+                <button type="button" 
+                    className="btn floatButton" 
+                    id="AddCardButton"
+                    onClick={() => this.handleShow()}
+                >
+                    <i className="fas fa-plus"></i>
+                </button>
 
                 <Modal show={this.state.show} onHide={this.handleClose} centered size="lg">
                     <Modal.Header>
                         <Modal.Title>Add Card</Modal.Title>
-                        <i class="fas fa-times" onClick={() => this.handleClose()}></i>
+                        <i className="fas fa-times" onClick={() => this.handleClose()}></i>
                     </Modal.Header>
                     <Modal.Body>
                         <Container>
@@ -96,4 +124,17 @@ class AddCardModal extends React.Component {
     }
 }
 
-export default AddCardModal;
+const mapStateToProps = (state) => {
+    return {
+        cards: state.cards,
+        saved: state.saved
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        eventAddCard: (card) => dispatch(actionAddCard(card))
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddCardModal);

@@ -1,54 +1,62 @@
 import React from 'react';
-import { Container, Row, Col, Card } from "react-bootstrap";
+import { Container, Row, Col, Card, Button } from "react-bootstrap";
 import { connect } from "react-redux";
-import AddCardModal from "./AddCardModal";
+import AddCardModal from "./modals/AddCardModal";
+import SaveCardsModal from "./modals/SaveCardsModal";
+import actionDeleteCard from "../../actions/actionDeleteCard";
 import "../../styles/Main.css";
 
 class AddCard extends React.Component {
     constructor(props) {
         super(props);
+    }
 
+    componentWillMount() {
+        if (this.props.cards.length === 0) {
+            var flashcards = this.props.saved.example;
+        }
+        else {
+            var flashcards = this.props.cards;
+        }
+        return flashcards;
     }
 
     render() {
 
-        let flashcards = [
-            {
-                word: "Test 1",
-                text: "This is a test.",
-                id: 1
-            },
-            {
-                word: "Test 2",
-                text: "This is another test.",
-                id: 2
-            },
-            {
-                word: "Test 3",
-                text: "This is a third test.",
-                id: 3
-            }
-        ]
+        let flashcards = this.componentWillMount();
 
         return (
             <Container id="AddCardContainer">
+
+                {/* Loading Existing Cards */}
                 <Row className="justify-content-center mb-4">
                     {flashcards.map(card => {
-                        return <Card className="card m-2">
+                        return <Card className="card m-2" key={card.id}>
                             <Card.Body>
                                 <Card.Title className="cardTitle">
+                                    {/* <Row className="justify-content-between"> */}
                                     {card.word}
+                                    <i className="fas fa-times cardButton"
+                                        onClick={() => this.props.eventDeleteCard(card)}
+                                    />
+                                    <i className="fas fa-pencil-alt cardButton"
+                                    />
+                                    {/* </Row> */}
                                 </Card.Title>
-                                <Card.Text>
+                                <Card.Text className="cardText">
                                     {card.text}
                                 </Card.Text>
                             </Card.Body>
                         </Card>;
                     })}
                 </Row>
-                <Row className="justify-content-center">
-                    <AddCardModal />
-                </Row>
+
+                {/* Save Button */}
+                <SaveCardsModal />
+
+                {/* AddCard Button */}
+                <AddCardModal />
+
             </Container>
         );
     }
@@ -56,14 +64,15 @@ class AddCard extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-
+        cards: state.cards,
+        saved: state.saved
     };
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-
+        eventDeleteCard: (card) => dispatch(actionDeleteCard(card))
     };
-}
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddCard);
