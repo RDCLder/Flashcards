@@ -3,31 +3,36 @@ import { Container, Row, Col } from "react-bootstrap";
 import "../../styles/Board.css";
 
 class Flashcard extends React.Component {
-    constructor(props) {
-        super(props);
-
-    }
 
     render() {
-
         var flashCardInnerClass = "flashCardInner";
         if (this.props.isFlipped) {
             flashCardInnerClass += " flipped";
         }
-
-        return (
-            <div className="flashCard" onClick={this.props.pickCard}>
-                <div className={flashCardInnerClass}>
-                    <div className="flashCardBack">
-                        <img
-                            src="https://www.digitalcrafts.com/img/DigitalCrafts-Logo-Wrench.png"
-                            alt=""
-                        />
+        if (this.props.type === "word") {
+            return (
+                <Col className="flashCard" onClick={this.props.pickCard}>
+                    <div className={flashCardInnerClass}>
+                        <div className="flashCardBack">
+                            <h4>Flashify</h4>
+                        </div>
+                        <div className="flashCardFront"><h5>{this.props.value}</h5></div>
                     </div>
-                    <div className="flashCardFront">{this.props.front}</div>
-                </div>
-            </div>
-        );
+                </Col>
+            );
+        }
+        else {
+            return (
+                <Col className="flashCard" onClick={this.props.pickCard}>
+                    <div className={flashCardInnerClass}>
+                        <div className="flashCardBack">
+                            <h4>Flashify</h4>
+                        </div>
+                        <div className="flashCardFront"><p>{this.props.value}</p></div>
+                    </div>
+                </Col>
+            )
+        }
     }
 }
 

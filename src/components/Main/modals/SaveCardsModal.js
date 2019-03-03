@@ -87,10 +87,11 @@ class SaveCardsModal extends React.Component {
 
                 <Modal show={this.state.show} onHide={this.handleClose} centered>
                     <Modal.Header>
-                        <Modal.Title>What should this collection be called?</Modal.Title>
+                        <Modal.Title>Save As Collection</Modal.Title>
                         <i className="fas fa-times" onClick={() => this.handleClose()}></i>
                     </Modal.Header>
                     <Modal.Body>
+                        <h5>Collection Name</h5>
                         <textarea type="text"
                             placeholder="Name goes here"
                             rows="1"

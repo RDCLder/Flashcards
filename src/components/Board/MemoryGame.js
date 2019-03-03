@@ -1,33 +1,38 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
+import { connect } from "react-redux";
 import Flashcard from "./Flashcard";
 import "../../styles/Board.css";
 
-function generateDeck(limit) {
-    let words = [];
-    let text = [];
+const generateDeck = (cards) => {
+    let words = cards.map(card => {
+        return card.word;
+    });
+    let text = cards.map(card => {
+        return card.text;
+    });
     let deck = [];
-    for (let i = 0; i < limit; i ++) {
-        deck.push({ isFlipped: false, value: words[i], id: i });
-        deck.push({ isFlipped: false, value: text[i], id: i });
+    for (let i = 0; i < cards.length; i ++) {
+        deck.push({ isFlipped: false, value: words[i], type: "word", id: i });
+        deck.push({ isFlipped: false, value: text[i], type: "text", id: i });
     }
     shuffle(deck);
     return deck;
-}
+};
 
-function shuffle(a) {
+const shuffle = (a) => {
     for (let i = a.length - 1; i > 0; i --) {
         const j = Math.floor(Math.random() * (i + 1));
         [a[i], a[j]] = [a[j], a[i]];
     }
     return a;
-}
+};
 
-class Board extends React.Component {
+class MemoryGame extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            deck: generateDeck(),
+            deck: generateDeck(this.props.cards),
             pickedCards: []
         }
     }
@@ -86,14 +91,16 @@ class Board extends React.Component {
         let cardsJSX = this.state.deck.map((card, index) => {
             return <Flashcard 
                 pickCard={() => this.pickCard(index)} 
-                key={index} 
+                key={index}
+                id={card.id}
+                type={card.type}
                 value={card.value}
                 isFlipped={card.isFlipped}
             />
         })
 
         return (
-            <Container fluid="true">
+            <Container id="MemoryGameContainer">
                 <Row>
                     {cardsJSX.slice(0, 4)}
                 </Row>
@@ -111,4 +118,11 @@ class Board extends React.Component {
     }
 }
 
-export default Board;
+const mapStateToProps = (state) => {
+    return {
+        cards: state.cards,
+        saved: state.saved
+    };
+};
+
+export default connect(mapStateToProps, null)(MemoryGame);

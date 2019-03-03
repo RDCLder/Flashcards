@@ -3,6 +3,7 @@ import { Container, Row, Col, Card, Button } from "react-bootstrap";
 import { connect } from "react-redux";
 import AddCardModal from "./modals/AddCardModal";
 import SaveCardsModal from "./modals/SaveCardsModal";
+import ClearCardsModal from "./modals/ClearCardsModal";
 import actionDeleteCard from "../../actions/actionDeleteCard";
 import "../../styles/Main.css";
 
@@ -30,7 +31,7 @@ class AddCard extends React.Component {
                     {/* Loading Existing Cards */}
                     <Row className="justify-content-center mb-4">
                         {flashcards.map(card => {
-                            return <Card className="card m-2" key={card.id}>
+                            return <Card className="card m-2" key={card.name}>
                                 <Card.Body>
                                     <Card.Title className="cardTitle">
                                         {card.word}
@@ -48,11 +49,14 @@ class AddCard extends React.Component {
                         })}
                     </Row>
 
+                    {/* AddCard Button */}
+                    <AddCardModal />
+
                     {/* Save Button */}
                     <SaveCardsModal />
 
-                    {/* AddCard Button */}
-                    <AddCardModal />
+                    {/* Clear Button */}
+                    <ClearCardsModal />
 
                 </Container>
             );

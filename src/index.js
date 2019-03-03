@@ -6,7 +6,7 @@ import {createStore} from "redux";
 import { Provider } from "react-redux";
 import Base from "./components/Base";
 import Main from "./components/Main/Main";
-import Board from "./components/Board/Board";
+import MemoryGame from "./components/Board/MemoryGame";
 import reducer from "./reducers/reducer";
 
 const store = createStore(reducer,
@@ -18,7 +18,7 @@ ReactDOM.render(
             <Base>
                 <Switch>
                     <Route exact path="/" component={Main} />
-                    <Route path="/play" component={Board} />
+                    <Route path="/play" component={MemoryGame} />
                 </Switch>
             </Base>
         </BrowserRouter>

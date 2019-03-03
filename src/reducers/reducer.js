@@ -2,13 +2,48 @@ const reducer = (state, action) => {
 
     if (state === undefined) {
         return {
-            cards: [],
+            cards: [
+                
+            ],
             saved: {
                 Example: [
                     {
                         word: "Example Card",
-                        text: "Click the ADD CARD button to add your own card.",
-                        id: "Example Card"
+                        text: "Click the + button to add your own card."
+                    }
+                ],
+                Test: [
+                    {
+                        word: "Test 1",
+                        text: "Text 1"
+                    },
+                    {
+                        word: "Test 2",
+                        text: "Text 2"
+                    },
+                    {
+                        word: "Test 3",
+                        text: "Text 3"
+                    },
+                    {
+                        word: "Test 4",
+                        text: "Text 4"
+                    },
+                    {
+                        word: "Test 5",
+                        text: "Text 5"
+                    },
+                    {
+                        word: "Test 6",
+                        text: "Text 6"
+                    },
+                    {
+                        word: "Test 7",
+                        text: "Text 7"
+                    },
+                    {
+                        word: "Test 8",
+                        text: "Text 8"
                     }
                 ]
             }
@@ -28,6 +63,11 @@ const reducer = (state, action) => {
             return {
                 ...state,
                 cards: newCards
+            };
+        case "CLEAR_CARDS":
+            return {
+                ...state,
+                cards: []
             };
         case "SAVE_CARDS":
             let newSaved = {

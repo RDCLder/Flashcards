@@ -22,7 +22,7 @@ class Navigator extends React.Component {
                     <Link to="/"><h4>Cards</h4></Link>
                 </Col>
                 <Col xs={1} className="my-auto">
-                    <Link to="/"><h4>Play</h4></Link>
+                    <Link to="/play"><h4>Play</h4></Link>
                 </Col>
                 <Col xs={1} className="my-auto"></Col>
             </Row>
