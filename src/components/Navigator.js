@@ -4,12 +4,6 @@ import { Link } from "react-router-dom";
 import "../styles/Main.css";
 
 class Navigator extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            key: "cards"
-        }
-    }
 
     render() {
         return (

@@ -3,7 +3,7 @@ const reducer = (state, action) => {
     if (state === undefined) {
         return {
             cards: [
-                
+
             ],
             saved: {
                 Example: [
@@ -47,8 +47,8 @@ const reducer = (state, action) => {
                     }
                 ]
             }
-        };
-    }
+        }
+    };
 
     switch (action.type) {
         case "ADD_CARD":
@@ -112,7 +112,6 @@ const reducer = (state, action) => {
         default:
             return state;
     }
-
 }
 
 export default reducer;
