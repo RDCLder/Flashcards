@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Row, Col, Modal, Button } from "react-bootstrap";
+import { Container, Row, Col, Modal, Button, Alert } from "react-bootstrap";
 import { connect } from "react-redux";
 import actionAddCard from "../../../actions/actionAddCard";
 import "../../../styles/Main.css";
@@ -13,6 +13,8 @@ class AddCardModal extends React.Component {
             word: "",
             text: "",
             id: "",
+            alertMessage: "",
+            alertErrorShow: false
         };
     }
 
@@ -21,35 +23,57 @@ class AddCardModal extends React.Component {
             word: e.target.value,
             id: e.target.value
         });
-        console.log(this.state.show, this.state.word, this.state.text, this.state.id);
     }
 
     changeText(e) {
         this.setState({
             text: e.target.value
         });
-        console.log(this.state.show, this.state.word, this.state.text, this.state.id);
     }
 
     handleSubmit() {
+        let words = this.props.cards.map(card => {
+            return card.word;
+        });
         if (this.state.word === "") {
-            alert("The word can't be blank!");
+            this.setState({ alertMessage: "The word can't be blank!" });
+            this.setState({ alertErrorShow: true });
+            setTimeout(() => {
+                this.setState({ alertErrorShow: false });
+            }, 3000);
         }
         else if (this.state.text === "") {
-            alert("The text can't be blank!");
+            this.setState({ alertMessage: "The text can't be blank!" });
+            this.setState({ alertErrorShow: true });
+            setTimeout(() => {
+                this.setState({ alertErrorShow: false });
+            }, 3000);
         }
         else if (this.state.word.length > 40) {
-            alert("The word cannot exceed 40 characters!");
+            this.setState({ alertMessage: "The word cannot exceed 40 characters!" });
+            this.setState({ alertErrorShow: true });
+            setTimeout(() => {
+                this.setState({ alertErrorShow: false });
+            }, 3000);
         }
         else if (this.state.word.length > 200) {
-            alert("The text cannot exceed 200 characters!");
+            this.setState({ alertMessage: "The text cannot exceed 200 characters!" });
+            this.setState({ alertErrorShow: true });
+            setTimeout(() => {
+                this.setState({ alertErrorShow: false });
+            }, 3000);
         }
-        else if (this.props.cards.includes(this.state.word)) {
-            alert(`${this.state.word} has already been used!`);
+        else if (words.includes(this.state.word)) {
+            this.setState({ alertMessage: `${this.state.word} has already been used!` });
+            this.setState({ alertErrorShow: true });
+            setTimeout(() => {
+                this.setState({ alertErrorShow: false });
+            }, 3000);
         }
         else {
             this.setState({
-                show: false 
+                show: false,
+                alertErrorShow: false
             });
             this.props.eventAddCard({
                 word: this.state.word,
@@ -61,21 +85,21 @@ class AddCardModal extends React.Component {
 
     handleClose() {
         this.setState({
-            show: false 
+            show: false
         });
     }
 
     handleShow() {
         this.setState({
-            show: true 
+            show: true
         });
     }
 
     render() {
         return (
             <>
-                <button type="button" 
-                    className="btn floatButton" 
+                <button type="button"
+                    className="btn floatButton"
                     id="AddCardButton"
                     onClick={() => this.handleShow()}
                 >
@@ -85,28 +109,31 @@ class AddCardModal extends React.Component {
                 <Modal show={this.state.show} onHide={this.handleClose} centered size="lg">
                     <Modal.Header>
                         <Modal.Title>Add Card</Modal.Title>
-                        <i className="fas fa-times" onClick={() => this.handleClose()}></i>
+                        <i className="fas fa-times modalDismiss" onClick={() => this.handleClose()}></i>
                     </Modal.Header>
                     <Modal.Body>
-                        <Container>
+                        <Container id="AddCardModalContainer">
                             <Row>
-                                <Col>
-                                    <h5>Word</h5>
-                                    <input type="text"
-                                        placeholder="Word goes here"
-                                        onChange={(e) => this.changeWord(e)}
-                                        className="modalInput"
-                                    />
-                                </Col>
-
-                                <Col>
-                                    <h5>Text</h5>
-                                    <input type="text"
-                                        placeholder="Text goes here"
-                                        onChange={(e) => this.changeText(e)}
-                                        className="modalInput"
-                                    />
-                                </Col>
+                                <h5>Word</h5>
+                            </Row>
+                            <Row className="mb-4">
+                                <textarea type="text"
+                                    placeholder="Word goes here"
+                                    rows="1"
+                                    onChange={(e) => this.changeWord(e)}
+                                    className="p-1"
+                                />
+                            </Row>
+                            <Row>
+                                <h5>Text</h5>
+                            </Row>
+                            <Row>
+                                <textarea type="text"
+                                    placeholder="Text goes here"
+                                    rows="5"
+                                    onChange={(e) => this.changeText(e)}
+                                    className="p-1"
+                                />
                             </Row>
                         </Container>
                     </Modal.Body>
@@ -119,6 +146,19 @@ class AddCardModal extends React.Component {
                         </Button>
                     </Modal.Footer>
                 </Modal>
+
+                <Alert variant="danger"
+                    show={this.state.alertErrorShow}
+                    className="alert"
+                >
+                    <Alert.Heading>
+                        Error
+                        <i className="fas fa-times alertDismiss"
+                            onClick={() => this.setState({ alertErrorShow: false })}
+                        />
+                    </Alert.Heading>
+                    <p>{this.state.alertMessage}</p>
+                </Alert>
             </>
         );
     }

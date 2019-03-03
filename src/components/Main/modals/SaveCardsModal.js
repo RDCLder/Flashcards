@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Row, Col, Modal, Button } from "react-bootstrap";
+import { Modal, Button, Alert } from "react-bootstrap";
 import { connect } from "react-redux";
 import actionSaveCards from "../../../actions/actionSaveCards";
 import "../../../styles/Main.css";
@@ -9,7 +9,10 @@ class SaveCardsModal extends React.Component {
         super(props);
 
         this.state = {
-            name: ""
+            name: "",
+            alertMessage: "",
+            alertSuccessShow: false,
+            alertErrorShow: false,
         };
     }
 
@@ -17,18 +20,22 @@ class SaveCardsModal extends React.Component {
         this.setState({
             name: e.target.value
         });
-        console.log(this.state.show, this.state.name, this.state.text, this.state.id);
     }
 
     handleSubmit() {
         if (this.state.name === "") {
-            alert("The name can't be blank!");
+            this.setState({alertMessage: "The name can't be blank!"});
+            this.setState({alertErrorShow: true});
+            setTimeout(() => {
+                this.setState({ alertErrorShow: false });
+            }, 3000);
         }
         else if (this.state.name.length > 40) {
-            alert("The name cannot exceed 40 characters!");
-        }
-        else if (this.props.saved.hasOwnProperty(this.state.name)) {
-            alert(`${this.state.name} has already been used!`)
+            this.setState({alertMessage: "The name cannot exceed 40 characters!"});
+            this.setState({alertErrorShow: true});
+            setTimeout(() => {
+                this.setState({ alertErrorShow: false });
+            }, 3000);
         }
         else {
             this.setState({
@@ -38,6 +45,20 @@ class SaveCardsModal extends React.Component {
                 this.state.name,
                 this.props.cards
             );
+            if (this.props.saved.hasOwnProperty(this.state.name)) {
+                this.setState({alertMessage: `${this.state.name} has been overwritten!`});
+                this.setState({alertSuccessShow: true});
+                setTimeout(() => {
+                    this.setState({ alertSuccessShow: false });
+                }, 3000);
+            }
+            else {
+                this.setState({alertMessage: `${this.state.name} has been saved successfully!`});
+                this.setState({alertSuccessShow: true});
+                setTimeout(() => {
+                    this.setState({ alertSuccessShow: false });
+                }, 3000);
+            }
         }
     }
 
@@ -70,10 +91,11 @@ class SaveCardsModal extends React.Component {
                         <i className="fas fa-times" onClick={() => this.handleClose()}></i>
                     </Modal.Header>
                     <Modal.Body>
-                        <input type="text"
+                        <textarea type="text"
                             placeholder="Name goes here"
+                            rows="1"
                             onChange={(e) => this.changeName(e)}
-                            className="modalInput"
+                            className="p-1"
                         />
                     </Modal.Body>
                     <Modal.Footer>
@@ -85,6 +107,32 @@ class SaveCardsModal extends React.Component {
                         </Button>
                     </Modal.Footer>
                 </Modal>
+
+                <Alert variant="success"
+                    show={this.state.alertSuccessShow}
+                    className="alert"
+                >
+                    <Alert.Heading>
+                        Success
+                        <i className="fas fa-times alertDismiss"
+                            onClick={() => this.setState({ alertSuccessShow: false })}
+                        />
+                    </Alert.Heading>
+                    <p>{this.state.alertMessage}</p>
+                </Alert>
+
+                <Alert variant="danger"
+                    show={this.state.alertErrorShow}
+                    className="alert"
+                >
+                    <Alert.Heading>
+                        Error
+                        <i className="fas fa-times alertDismiss"
+                            onClick={() => this.setState({ alertErrorShow: false })}
+                        />
+                    </Alert.Heading>
+                    <p>{this.state.alertMessage}</p>
+                </Alert>
             </>
         );
     }

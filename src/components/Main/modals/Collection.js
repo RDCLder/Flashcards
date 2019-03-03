@@ -1,6 +1,7 @@
 import React from 'react';
-import { Container, Row, Col, Card, Collapse } from "react-bootstrap";
+import { Container, Row, Col, Card, Collapse, Alert } from "react-bootstrap";
 import { connect } from "react-redux";
+import actionLoadCards from "../../../actions/actionLoadCards";
 import actionDeleteSavedCard from "../../../actions/actionDeleteSavedCard";
 import actionDeleteCollection from "../../../actions/actionDeleteCollection";
 import "../../../styles/Main.css";
@@ -11,11 +12,24 @@ class Collection extends React.Component {
 
         this.state = {
             open: false,
+            alertMessage: "",
+            alertSuccessShow: false,
         };
+    }
+
+    handleEditCollection(collectionCards) {
+        this.setState({alertMessage: `${this.props.name} has been added to CARDS!`});
+        this.setState({alertSuccessShow: true});
+        setTimeout(() => {
+            this.setState({ alertSuccessShow: false });
+        }, 3000);
+        console.log(typeof collectionCards);
+        this.props.eventLoadCards(collectionCards);
     }
 
     render() {
         const { open } = this.state;
+        let collectionCards = this.props.saved[this.props.name];
         return (
             <Container
                 aria-controls={this.props.name}
@@ -25,10 +39,12 @@ class Collection extends React.Component {
                 <Row className="CollectionHead">
                     <Col className="my-auto pl-4">
                         <h4>{this.props.name}</h4>
+                        {collectionCards.length} Flashcard(s)
                     </Col>
-                    <Col></Col>
-                    <Col className="textRight my-auto">
-                        {this.props.saved[this.props.name].length} Flashcard(s)
+                    <Col xs={1} className="textRight my-auto pr-4">
+                        <i className="fas fa-pencil-alt CollectionButton"
+                            onClick={() => this.handleEditCollection(collectionCards)}
+                        />
                     </Col>
                     <Col xs={1} className="textRight my-auto pr-4">
                         <i className="fas fa-chevron-down CollectionButton"
@@ -42,11 +58,11 @@ class Collection extends React.Component {
                     </Col>
                 </Row>
                 <Collapse in={this.state.open}>
-                    <Row className="CollectionBody justify-content-center" 
-                        id={this.props.name} 
+                    <Row className="CollectionBody justify-content-center"
+                        id={this.props.name}
                         onClick={() => this.setState({ open: !open })}
                     >
-                        {this.props.saved[this.props.name].map(card => {
+                        {collectionCards.map(card => {
                             return <Card className="card m-2" key={card.id}>
                                 <Card.Body>
                                     <Card.Title className="cardTitle">
@@ -65,6 +81,19 @@ class Collection extends React.Component {
                         })}
                     </Row>
                 </Collapse>
+
+                <Alert variant="success"
+                    show={this.state.alertSuccessShow}
+                    className="alert"
+                >
+                    <Alert.Heading>
+                        Success
+                        <i className="fas fa-times alertDismiss"
+                            onClick={() => this.setState({ alertSuccessShow: false })}
+                        />
+                    </Alert.Heading>
+                    <p>{this.state.alertMessage}</p>
+                </Alert>
             </Container>
         );
     }
@@ -79,6 +108,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
+        eventLoadCards: (cards) => dispatch(actionLoadCards(cards)),
         eventDeleteSavedCard: (name, card) => dispatch(actionDeleteSavedCard(name, card)),
         eventDeleteCollection: (name) => dispatch(actionDeleteCollection(name))
     };

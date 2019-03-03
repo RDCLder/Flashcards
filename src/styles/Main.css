@@ -50,8 +50,9 @@ a:hover {
     text-decoration: none;
 }
 
-input {
-    border-radius: 8px;
+input, textarea {
+    width: 100%;
+    border-radius: 10px;
 }
 
 input:focus,
@@ -111,6 +112,23 @@ button:focus {
     bottom: 50px;
 }
 
+.alert {
+    position: fixed;
+    top: 10%;
+    right: 2%;
+    z-index: 9999;
+}
+
+.alertDismiss {
+    margin-top: 2%;
+    float: right;
+    font-size: 20px;
+}
+
+.alertDismiss:hover {
+    cursor: pointer;
+}
+
 /*------------------------------------------------
     AddCard Component
 -------------------------------------------------*/
@@ -120,9 +138,8 @@ button:focus {
     color: white;
 }
 
-.modalInput {
-    width: 90%;
-    padding: 1%;
+#AddCardModalContainer > .row {
+    margin: auto;
 }
 
 .card {
@@ -130,6 +147,7 @@ button:focus {
     width: 30vw;
     color: black;
     border-radius: 10px;
+    /* box-shadow: 2px 2px 4px #999; */
 }
 
 .cardTitle {
@@ -166,6 +184,7 @@ button:focus {
     padding: 0;
     color: white;
     border-radius: 10px;
+    /* box-shadow: 2px 2px 4px #999; */
 }
 
 .CollectionHead {
@@ -184,7 +203,7 @@ button:focus {
 }
 
 .CollectionButton {
-    font-size: 20px;
+    font-size: 30px;
 }
 
 /*------------------------------------------------
